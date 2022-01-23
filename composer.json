@@ -1,0 +1,17 @@
+{
+    "name": "nikko/client-rest-api",
+    "description": "Client fod restAPI",
+    "autoload": {
+        "classmap": ["src/"],
+        "psr-4": {
+            "Nikko\\ClientRestApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NikKokor",
+            "email": "nikkokor@yandex.ru"
+        }
+    ],
+    "require": {}
+}

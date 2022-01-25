@@ -13,5 +13,7 @@
             "email": "nikkokor@yandex.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "ext-curl": "*"
+    }
 }

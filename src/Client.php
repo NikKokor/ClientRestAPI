@@ -112,4 +112,59 @@ class Client{
 
         return $response;
     }
+
+    public function addFile(string $file)
+    {
+        if(!file_exists(realpath($file))) {
+            return [
+                'status' => 409,
+                'message' => "No such file"
+            ];
+        }
+
+        $ch = curl_init($this->url . '/file/add');
+        //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array('file' => new \CURLFile($file)));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
+
+    public function getAllFiles()
+    {
+        $ch = curl_init($this->url . '/file/get_all');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
+
+    public function getByNameFile(string $name)
+    {
+        $ch = curl_init($this->url . '/file/get/' . $name);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
+
+    public function deleteFile(string $name)
+    {
+        $ch = curl_init($this->url . '/file/delete/' . $name);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
 }
